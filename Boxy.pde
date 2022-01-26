@@ -25,9 +25,9 @@ class Boxy {
   }
 
   void show() {
-    pushMatrix();
+   pushMatrix();
     translate(pos.x, pos.y, pos.z);
-    noStroke();
+    stroke(55,55,55);
     fill(255);
     box(r);
     popMatrix();
