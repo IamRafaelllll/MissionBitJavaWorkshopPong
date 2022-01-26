@@ -3,7 +3,7 @@
 float rot = 0;
 ArrayList<Boxy> boxArr;
 void setup() {
-  size(400, 400, P3D);
+  size(700, 700, P3D);
   boxArr = new ArrayList<Boxy>();
   Boxy AmazonPrime = new Boxy(0, 0, 0, 200);
   boxArr.add(AmazonPrime);
