@@ -25,10 +25,10 @@ class Boxy {
   }
 
   void show() {
-   pushMatrix();
+     pushMatrix();
     translate(pos.x, pos.y, pos.z);
-    stroke(55,55,55);
-    fill(255);
+    stroke(255);
+    fill(55,55,55);
     box(r);
     popMatrix();
   }
