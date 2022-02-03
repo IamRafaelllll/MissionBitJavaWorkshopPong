@@ -1,36 +1,62 @@
-
-
-float rot = 0;
-ArrayList<Boxy> boxArr;
+float x, y, z, rotX, rotY, rotZ;
+int mouseClicks = 0;
 void setup() {
-  size(700, 700, P3D);
-  boxArr = new ArrayList<Boxy>();
-  Boxy AmazonPrime = new Boxy(0, 0, 0, 200);
-  boxArr.add(AmazonPrime);
-}
-void mousePressed() {
-  ArrayList<Boxy> FedExBoxes = new ArrayList<Boxy>();
-  for (Boxy AmazonPrime : boxArr) {
-    ArrayList<Boxy> USPSBoxes = AmazonPrime.recursion();
-    FedExBoxes.addAll(USPSBoxes);
-  }
-  boxArr = FedExBoxes;
+  size(750, 750, P3D);
+  x = width/2;
+  y = width/2+500;
+  z = -2500;
+  rotX = PI/3;
+  rotY = 0;
+  rotZ = PI/4;
 }
 
 void draw() {
-  
-  background(0);
-  noStroke();
+  background(255);
+  pushMatrix();
+  translate(x, y, z);
+  rotateX(rotX);
+  rotateY(rotY);
+  rotateZ(rotZ);
+  stroke(0);
   noFill();
-  lights();
-  
-  translate(width/2, height/2);
-  rotateX(rot);
-  rotateY(rot*0.2);
-  rotateZ(rot*0.2);
-  
-  for (Boxy b : boxArr) {
-    b.show();
-  }
-  rot+= 0.04;
+  originalFractal(-50, -50, 400, 1000);
+  popMatrix();
+  rotZ+=0.04;
+
+  System.out.println(mouseClicks);
 }
+
+void originalFractal(int x, int y, int z, int length) {
+  
+ if (length<=100) {
+    pyramid(x, y, z, length);
+  }
+  else{
+  originalFractal(x, y, z, length/2);
+    originalFractal(x+length/2, y, z, length/2);
+    originalFractal(x, y+length/2, z, length/2);
+    originalFractal(x+length/2, y+length/2, z, length/2);
+    originalFractal(x+length/4, y+length/4, z+length/2, length/2);
+  }
+  
+}
+void mousePressed(){
+mouseClicks+=1;
+}
+void pyramid(int x, int y, int z, int length) {
+  beginShape();
+  vertex(x, y, z);
+  vertex(x+length,y,z);
+  vertex(x+length/2,y+length/2,z+length);
+  vertex(x+length,y,z);
+  vertex(x+length, y+length,z);
+  vertex(x+length/2, y+length/2, z+length);
+  vertex(x+length, y+length, z);
+  vertex(x, y+length,z);
+  vertex(x+length/2, y+length/2, z+length);
+  vertex(x,y+length,z);
+  vertex(x,y,z);
+  vertex( x+length/2, y+length/2, z+length);
+  endShape();
+}
+
