@@ -19,31 +19,31 @@ void draw() {
   rotateZ(rotZ);
   stroke(0);
   noFill();
-  originalFractal(-50, -50, 400, 1000);
+  recurse(-50, -50, 400, 1000);
   popMatrix();
   rotZ+=0.04;
 
   System.out.println(mouseClicks);
 }
 
-void originalFractal(int x, int y, int z, int length) {
+void recurse(int x, int y, int z, int length) {
   
  if (length<=100) {
-    pyramid(x, y, z, length);
+    Sierpinskify(x, y, z, length);
   }
   else{
-  originalFractal(x, y, z, length/2);
-    originalFractal(x+length/2, y, z, length/2);
-    originalFractal(x, y+length/2, z, length/2);
-    originalFractal(x+length/2, y+length/2, z, length/2);
-    originalFractal(x+length/4, y+length/4, z+length/2, length/2);
+  recurse(x, y, z, length/2);
+    recurse(x+length/2, y, z, length/2);
+    recurse(x, y+length/2, z, length/2);
+    recurse(x+length/2, y+length/2, z, length/2);
+    recurse(x+length/4, y+length/4, z+length/2, length/2);
   }
   
 }
 void mousePressed(){
 mouseClicks+=1;
 }
-void pyramid(int x, int y, int z, int length) {
+void Sierpinskify(int x, int y, int z, int length) {
   beginShape();
   vertex(x, y, z);
   vertex(x+length,y,z);
@@ -59,4 +59,3 @@ void pyramid(int x, int y, int z, int length) {
   vertex( x+length/2, y+length/2, z+length);
   endShape();
 }
-
