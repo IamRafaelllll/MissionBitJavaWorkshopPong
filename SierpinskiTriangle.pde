@@ -1,61 +1,56 @@
-float x, y, z, rotX, rotY, rotZ;
-int mouseClicks = 0;
-void setup() {
-  size(750, 750, P3D);
-  x = width/2;
-  y = width/2+500;
-  z = -2500;
-  rotX = PI/3;
-  rotY = 0;
-  rotZ = PI/4;
+int Start = 100;
+Boolean qPressed, ePressed;
+public void setup(){
+  size(500,500);
+  background (55,55,55);
+  fill(255);
+}
+public void draw(){
+  background(0);
+  stroke(255);
+  fedExCube(162,162,162);
+  if (qPressed=true && Start>3){
+    Start/=3;
+  }
+  if (ePressed=true&& Start>3){
+    Start*=3;
+  }
+  System.out.println(ePressed);
 }
 
-void draw() {
-  background(255);
-  pushMatrix();
-  translate(x, y, z);
-  rotateX(rotX);
-  rotateY(rotY);
-  rotateZ(rotZ);
-  stroke(0);
-  noFill();
-  recurse(-50, -50, 400, 1000);
-  popMatrix();
-  rotZ+=0.04;
 
-  System.out.println(mouseClicks);
-}
-
-void recurse(int x, int y, int z, int length) {
-  
- if (length<=100) {
-    Sierpinskify(x, y, z, length);
+public void fedExCube(int x, int y, int size){
+  if (size>=2*Start){
+    stroke(255);
+    fedExCube(x+size/3,y-size*2/3, size/3);
+    fedExCube(x+size/3, y+size+size*1/3, size/3);
+    fedExCube(x-2*size/3, y+size/3, size/3);
+    fedExCube(x+4*size/3, y+size/3, size/3);
+    fedExCube(x+4*size/3,y-2*size/3,size/3);
+    fedExCube(x+4*size/3,y+4*size/3,size/3);
+    fedExCube(x-2*size/3, y+size/3, size/3);
+    fedExCube(x-2*size/3, y-2*size/3,size/3);
+    fedExCube(x-2*size/3,y+4*size/3,size/3);
+    rect(x,y,size,size);
   }
   else{
-  recurse(x, y, z, length/2);
-    recurse(x+length/2, y, z, length/2);
-    recurse(x, y+length/2, z, length/2);
-    recurse(x+length/2, y+length/2, z, length/2);
-    recurse(x+length/4, y+length/4, z+length/2, length/2);
+    rect(x,y,size,size);
   }
-  
 }
-void mousePressed(){
-mouseClicks+=1;
+public void keyPressed(){
+ if (key=='e' || key=='E'){
+  ePressed=true;
+ }
+ if (key=='q' || key=='Q'){
+   qPressed=true;
+ }
+ 
 }
-void Sierpinskify(int x, int y, int z, int length) {
-  beginShape();
-  vertex(x, y, z);
-  vertex(x+length,y,z);
-  vertex(x+length/2,y+length/2,z+length);
-  vertex(x+length,y,z);
-  vertex(x+length, y+length,z);
-  vertex(x+length/2, y+length/2, z+length);
-  vertex(x+length, y+length, z);
-  vertex(x, y+length,z);
-  vertex(x+length/2, y+length/2, z+length);
-  vertex(x,y+length,z);
-  vertex(x,y,z);
-  vertex( x+length/2, y+length/2, z+length);
-  endShape();
+public void keyReleased (){
+   if (key=='e' || key=='E'){
+  ePressed=false;
+ }
+ if (key=='q' || key=='Q'){
+   qPressed=false;
+ }
 }
