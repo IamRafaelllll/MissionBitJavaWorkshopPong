@@ -1,7 +1,7 @@
-int Start = 100;
+int Start = 250;
 int numOfCarpets = 0;
 public void setup() {
-  size(500, 500);
+  size(485, 485);
   background (55, 55, 55);
   fill(255);
 }
@@ -34,5 +34,5 @@ public void mousePressed() {
   if (numOfCarpets<7) {
     Start/=3;
   }
- 
+
 }
