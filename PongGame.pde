@@ -46,9 +46,9 @@ void keyPressed() {
     left.move(10);
   }
 
-  if (key == 'j') {
+  if (key == 'o') {
     right.move(-10);
-  } else if (key == 'm') {
+  } else if (key == 'l') {
     right.move(10);
   }
 }
